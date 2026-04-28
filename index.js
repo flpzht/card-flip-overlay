@@ -1,3 +1,6 @@
+// Card Flip Overlay
+
+/* Types */
 const typeColors = {
   normal:   { bg:"#E8E8E0", color:"#6D6D4E" },
   fire:     { bg:"#FDEBD0", color:"#9C3A00" },
@@ -21,6 +24,8 @@ const typeColors = {
 
 const accentColors = ["#7F77DD","#1D9E75","#BA7517","#D85A30","#378ADD","#D4537E"];
 
+
+/* Constants and state */
 const scene   = document.getElementById('scene');
 const grid    = document.getElementById('grid');
 const overlay = document.getElementById('overlay');
