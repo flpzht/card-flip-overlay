@@ -1,0 +1,13 @@
+  .header {
+    width: 100%;
+    display: block;
+    text-align: center;
+    padding-bottom: 2rem;
+  }
+
+  .header__logo {
+    max-width: 100%;
+    object-position: center;
+    image-rendering:auto;
+    margin-bottom: 12px;
+  }
