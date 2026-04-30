@@ -83,67 +83,67 @@ async function loadPokemon(id) {
   });
 })();
 
-overlay.addEventListener('click', closeCard);
+// overlay.addEventListener('click', closeCard);
 
-function openNew(wrap, card) {
-  const sceneRect = scene.getBoundingClientRect();
-  const cardRect  = card.getBoundingClientRect();
-  const relTop    = cardRect.top  - sceneRect.top;
-  const relLeft   = cardRect.left - sceneRect.left;
-  const w = cardRect.width, h = cardRect.height;
+// function openNew(wrap, card) {
+//   const sceneRect = scene.getBoundingClientRect();
+//   const cardRect  = card.getBoundingClientRect();
+//   const relTop    = cardRect.top  - sceneRect.top;
+//   const relLeft   = cardRect.left - sceneRect.left;
+//   const w = cardRect.width, h = cardRect.height;
 
-  ghost = document.createElement('div');
-  ghost.className = 'card ghost';
-  ghost.style.cssText = `width:${w}px;height:${h}px;`;
-  wrap.appendChild(ghost);
+//   ghost = document.createElement('div');
+//   ghost.className = 'card ghost';
+//   ghost.style.cssText = `width:${w}px;height:${h}px;`;
+//   wrap.appendChild(ghost);
 
-  card.style.cssText = `position:absolute;top:${relTop}px;left:${relLeft}px;width:${w}px;height:${h}px;transition:none;`;
-  scene.appendChild(card);
+//   card.style.cssText = `position:absolute;top:${relTop}px;left:${relLeft}px;width:${w}px;height:${h}px;transition:none;`;
+//   scene.appendChild(card);
 
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      const popW = Math.min(230, sceneRect.width * 0.55);
-      const popH = popW * (4 / 3);
-      const targetTop  = (sceneRect.height - popH) / 2;
-      const targetLeft = (sceneRect.width  - popW) / 2;
+//   requestAnimationFrame(() => {
+//     requestAnimationFrame(() => {
+//       const popW = Math.min(230, sceneRect.width * 0.55);
+//       const popH = popW * (4 / 3);
+//       const targetTop  = (sceneRect.height - popH) / 2;
+//       const targetLeft = (sceneRect.width  - popW) / 2;
 
-      card.style.cssText = `
-        position:absolute;
-        top:${targetTop}px;left:${targetLeft}px;
-        width:${popW}px;height:${popH}px;
-        transform:rotateY(180deg);
-        transition:top 0.65s cubic-bezier(0.4,0,0.2,1),left 0.65s cubic-bezier(0.4,0,0.2,1),width 0.65s cubic-bezier(0.4,0,0.2,1),height 0.65s cubic-bezier(0.4,0,0.2,1),transform 0.65s cubic-bezier(0.4,0,0.2,1);
-        z-index:20;`;
-      overlay.classList.add('active');
-      openWrap = wrap; openCardEl = card;
-    });
-  });
-}
+//       card.style.cssText = `
+//         position:absolute;
+//         top:${targetTop}px;left:${targetLeft}px;
+//         width:${popW}px;height:${popH}px;
+//         transform:rotateY(180deg);
+//         transition:top 0.65s cubic-bezier(0.4,0,0.2,1),left 0.65s cubic-bezier(0.4,0,0.2,1),width 0.65s cubic-bezier(0.4,0,0.2,1),height 0.65s cubic-bezier(0.4,0,0.2,1),transform 0.65s cubic-bezier(0.4,0,0.2,1);
+//         z-index:20;`;
+//       overlay.classList.add('active');
+//       openWrap = wrap; openCardEl = card;
+//     });
+//   });
+// }
 
-function closeCard(cb) {
-  if (!openCardEl) return;
-  const card = openCardEl, wrap = openWrap;
-  const sceneRect = scene.getBoundingClientRect();
-  const ghostRect = ghost.getBoundingClientRect();
-  const relTop  = ghostRect.top  - sceneRect.top;
-  const relLeft = ghostRect.left - sceneRect.left;
-  const w = ghost.offsetWidth, h = ghost.offsetHeight;
+// function closeCard(cb) {
+//   if (!openCardEl) return;
+//   const card = openCardEl, wrap = openWrap;
+//   const sceneRect = scene.getBoundingClientRect();
+//   const ghostRect = ghost.getBoundingClientRect();
+//   const relTop  = ghostRect.top  - sceneRect.top;
+//   const relLeft = ghostRect.left - sceneRect.left;
+//   const w = ghost.offsetWidth, h = ghost.offsetHeight;
 
-  card.style.cssText = `
-    position:absolute;
-    top:${relTop}px;left:${relLeft}px;
-    width:${w}px;height:${h}px;
-    transform:rotateY(0deg);
-    transition:top 0.55s cubic-bezier(0.4,0,0.2,1),left 0.55s cubic-bezier(0.4,0,0.2,1),width 0.55s cubic-bezier(0.4,0,0.2,1),height 0.55s cubic-bezier(0.4,0,0.2,1),transform 0.55s cubic-bezier(0.4,0,0.2,1);
-    z-index:20;`;
-  overlay.classList.remove('active');
-  openCardEl = null; openWrap = null;
+//   card.style.cssText = `
+//     position:absolute;
+//     top:${relTop}px;left:${relLeft}px;
+//     width:${w}px;height:${h}px;
+//     transform:rotateY(0deg);
+//     transition:top 0.55s cubic-bezier(0.4,0,0.2,1),left 0.55s cubic-bezier(0.4,0,0.2,1),width 0.55s cubic-bezier(0.4,0,0.2,1),height 0.55s cubic-bezier(0.4,0,0.2,1),transform 0.55s cubic-bezier(0.4,0,0.2,1);
+//     z-index:20;`;
+//   overlay.classList.remove('active');
+//   openCardEl = null; openWrap = null;
 
-  card.addEventListener('transitionend', function done() {
-    card.removeEventListener('transitionend', done);
-    card.style.cssText = '';
-    wrap.appendChild(card);
-    if (ghost) { ghost.remove(); ghost = null; }
-    if (cb) cb();
-  }, { once: true });
-}
+//   card.addEventListener('transitionend', function done() {
+//     card.removeEventListener('transitionend', done);
+//     card.style.cssText = '';
+//     wrap.appendChild(card);
+//     if (ghost) { ghost.remove(); ghost = null; }
+//     if (cb) cb();
+//   }, { once: true });
+// }
