@@ -22,7 +22,7 @@ const typeColors = {
   fairy:    { bg:"#FFE0EE", color:"#8B1A50" },
 };
 
-const accentColors = ["#7F77DD","#1D9E75","#BA7517","#D85A30","#378ADD","#D4537E"];
+const accentColors = ["#1D9E75","#1D9E75","#1D9E75","#D85A30","#D85A30","#D85A30","#378ADD","#378ADD","#378ADD"];
 
 
 /* Constants and state */
@@ -31,7 +31,7 @@ const grid    = document.getElementById('grid');
 const overlay = document.getElementById('overlay');
 let openWrap = null, openCardEl = null, ghost = null;
 
-for (let i = 0; i < 6; i++) {
+for (let i = 0; i < 9; i++) {
   const wrap = document.createElement('div');
   wrap.className = 'card-wrap';
   wrap.innerHTML = `<div class="card"><div class="face front"><div class="skeleton"></div></div><div class="face back"></div></div>`;
@@ -45,7 +45,7 @@ async function loadPokemon(id) {
 
 (async () => {
   const wraps    = [...grid.querySelectorAll('.card-wrap')];
-  const pokemons = await Promise.all([1,2,3,4,5,6].map(loadPokemon));
+  const pokemons = await Promise.all([1,2,3,4,5,6,7,8,9].map(loadPokemon));
 
   pokemons.forEach((p, i) => {
     const wrap   = wraps[i];
