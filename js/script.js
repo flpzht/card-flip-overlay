@@ -19,7 +19,7 @@ scene.addEventListener('click', e => {
     }
 });
 
-pokemonAPI.loadPokemons(20).then(pokemons => {
+pokemonAPI.loadPokemons(21).then(pokemons => {
     pokemons.forEach(p => {
         const card = createFrontCard(p);
         grid.appendChild(card);

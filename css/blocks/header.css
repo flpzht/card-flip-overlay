@@ -3,6 +3,10 @@
     display: block;
     text-align: center;
     padding-bottom: 2rem;
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 100;
+    margin: 32px;
   }
 
   .header__logo {
