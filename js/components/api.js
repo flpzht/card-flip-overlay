@@ -16,8 +16,8 @@ function createPokemonAPI({ baseUrl, headers }) {
     const showPokemonInfo = (p) => {
         const number = p.id;
         const name = p.name;
-        const img = p.sprites.front_default;
-        const types = p.types.map(t => t.type.name).join(', ');
+        const img = p.sprites.other['official-artwork'].front_default;
+        const types = p.types.map(t => t.type.name);
 
         return { number, name, img, types };
     };
@@ -46,11 +46,12 @@ export const pokemonAPI = createPokemonAPI({
     headers: { 'Content-Type': 'application/json' },
 });
 
-pokemonAPI.loadPokemons(2).then(console.log);
+// pokemonAPI.loadPokemons(2).then(console.log);
+pokemonAPI.getPokemonById(1).then(console.log);
 
-pokemonAPI.loadPokemons(2)
-.then(pokemons => {
-    pokemons.forEach(({number, name, img, types}) => {
-        console.log(`Number: ${number}, Name: ${name}, Image: ${img}, Types: ${types}`);
-    });
-});
+// pokemonAPI.loadPokemons(2)
+// .then(pokemons => {
+//     pokemons.forEach(({number, name, img, types}) => {
+//         console.log(`Number: ${number}, Name: ${name}, Image: ${img}, Types: ${types}`);
+//     });
+// });

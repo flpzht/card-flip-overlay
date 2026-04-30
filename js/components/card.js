@@ -23,7 +23,7 @@ typesEl.textContent = types.join(', ');
 
 const numberEl = document.createElement('span');
 numberEl.className = 'f-number';
-numberEl.textContent = number;
+numberEl.textContent = `#${String(number).padStart(3, '0')}`;
 
 face.appendChild(accent);
 face.appendChild(numberEl);
@@ -35,3 +35,5 @@ card.appendChild(face);
 
 return card;
 };
+
+export default createFrontCard;
