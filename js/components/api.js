@@ -9,25 +9,34 @@ function createPokemonAPI({ baseUrl, headers }) {
         return res.json();
     };
 
-    const loadInitialPokemon = (limit = 9) => request(`/pokemon?limit=${limit}`);
+    const getInitialPokemon = (limit = 9) => request(`/pokemon?limit=${limit}`);
 
-    const loadPokemonById = (id) => request(`/pokemon/${id}`);
+    const getPokemonById = (id) => request(`/pokemon/${id}`);
     
-    const showPokemonInfo = (pokemon) => {
-        const number = pokemon.id;
-        const name = pokemon.name;
-        const img = pokemon.sprites.front_default;
-        const types = pokemon.types.map(t => t.type.name).join(', ');
+    const showPokemonInfo = (p) => {
+        const number = p.id;
+        const name = p.name;
+        const img = p.sprites.front_default;
+        const types = p.types.map(t => t.type.name).join(', ');
 
         return { number, name, img, types };
     };
 
-    const getAppInfo = async () => Promise.all([loadInitialPokemon(), loadPokemonById(id)]);
+    const loadPokemons = (list) => getInitialPokemon(list)
+        .then(async (pokemonList) => {
+            const pokemons = await Promise.all(pokemonList.results.map(p => getPokemonById(p.name)));
+            return pokemons.map(showPokemonInfo);
+        }).catch(error => {
+            console.error('Error loading Pokémon data:', error);
+        });
+
+    const getAppInfo = async () => Promise.all([getInitialPokemon(), getPokemonById(id)]);
 
     return {
-        loadInitialPokemon,
-        loadPokemonById,
+        getInitialPokemon,
+        getPokemonById,
         showPokemonInfo,
+        loadPokemons,
         getAppInfo,
     };
 }
@@ -37,9 +46,11 @@ export const pokemonAPI = createPokemonAPI({
     headers: { 'Content-Type': 'application/json' },
 });
 
+pokemonAPI.loadPokemons(2).then(console.log);
 
-pokemonAPI.loadInitialPokemon()
-.then(async (pokemonList) => {
-    const pokemons = await Promise.all(pokemonList.results.map(p => pokemonAPI.loadPokemonById(p.name)));
-    return pokemons.map(pokemonAPI.showPokemonInfo);
+pokemonAPI.loadPokemons(2)
+.then(pokemons => {
+    pokemons.forEach(({number, name, img, types}) => {
+        console.log(`Number: ${number}, Name: ${name}, Image: ${img}, Types: ${types}`);
+    });
 });
