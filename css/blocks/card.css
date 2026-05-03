@@ -73,6 +73,21 @@
     letter-spacing: 0.02em;
   }
 
+  .f-num {
+    font-size: 11px;
+    font-weight: 500;
+    color: #888;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+
+  .f-types { display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+
   .b-num {
     font-size: 11px;
     font-weight: 500;
@@ -97,7 +112,11 @@
     margin-bottom: 14px;
   }
 
-  .b-types { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  .b-types { display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 
   .b-type {
     font-size: 12px;

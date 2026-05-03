@@ -21,3 +21,5 @@ const typeColors = {
 };
 
 const accentColors = ["#1D9E75","#1D9E75","#1D9E75","#D85A30","#D85A30","#D85A30","#378ADD","#378ADD","#378ADD"];
+
+export { typeColors, accentColors };
