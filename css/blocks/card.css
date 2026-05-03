@@ -24,7 +24,7 @@
   .card :not(:hover) {
     transform: scale(0.98);
     opacity: 0.8;
-}
+  }
 
   .card :hover {
     transform: scale(1.06);
@@ -50,6 +50,44 @@
     background: #ffffff;
   }
 
+.b-card {
+    width: 100%;
+    aspect-ratio: 3/4;
+    position: relative;
+    transform-style: preserve-3d;
+    border-radius: 16px;
+    cursor: pointer;
+    transition:
+      transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+      width 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+      height 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+      top 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+      left 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+      scale 350ms ease,
+      opacity 350ms linear;
+  }
+
+  .popup--active {
+   
+    z-index:20;
+    width: 400px;
+    aspect-ratio: 3/4;
+    position: relative;
+    top: 0;
+    left: 0;
+    transform-style: preserve-3d;
+    border-radius: 16px;
+    cursor: pointer;
+    transition:
+      transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+      width 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+      height 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+      top 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+      left 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+      scale 350ms ease,
+      opacity 350ms linear;
+}
+
   .back {
     transform: rotateY(180deg);
     background: #ffffff;
@@ -71,7 +109,7 @@
     left: 0;
   }
 
-  
+
 
   .f-img {
     width: 72%;

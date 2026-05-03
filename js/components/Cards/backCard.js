@@ -2,8 +2,18 @@ import { typeColors, accentColors } from '../types.js';
 
 export default function createBackCard({ num, name, img, types }) {
 
+const handleCloseCard = (element) => {
+  element.classList.remove('popup--active');
+  element.classList.add('ghost');
+};
+
 const backCard = document.createElement('div');
 backCard.className = 'card ghost';
+
+backCard.addEventListener('click', () => {
+  handleCloseCard(backCard);
+  document.getElementById('overlay').classList.remove('active');
+});
 
 const back = document.createElement('div');
 back.className = 'face back';
@@ -11,6 +21,11 @@ back.className = 'face back';
 const btnClose = document.createElement('button');
 btnClose.className = 'b-close';
 btnClose.textContent = 'X';
+
+btnClose.addEventListener('click', () => {
+  handleCloseCard(backCard);
+  document.getElementById('overlay').classList.remove('active');
+});
 
 const accent = document.createElement('div');
 accent.className = 'b-accent';
