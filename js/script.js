@@ -8,12 +8,12 @@ const grid    = document.getElementById('grid');
 const overlay = document.getElementById('overlay');
 let openWrap = null, openCardEl = null, ghost = null;
 
-// pokemonAPI.loadPokemons(6).then(pokemons => {
-//     pokemons.forEach(p => {
-//         const card = createFrontCard(p);
-//         grid.appendChild(card);
-//     });
-// });
+pokemonAPI.loadPokemons(6).then(pokemons => {
+    pokemons.forEach(p => {
+        const card = createFrontCard(p);
+        grid.appendChild(card);
+    });
+});
 
 pokemonAPI.loadPokemons(6).then(pokemons => {
     pokemons.forEach(p => {

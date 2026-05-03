@@ -1,9 +1,9 @@
 import { typeColors, accentColors } from '../types.js';
 
 export default function createBackCard({ num, name, img, types }) {
-  
+
 const backCard = document.createElement('div');
-backCard.className = 'card';
+backCard.className = 'card ghost';
 
 const back = document.createElement('div');
 back.className = 'face back';
