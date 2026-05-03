@@ -61,6 +61,7 @@ async function loadPokemon(id) {
         <img class="f-img" src="${img}" alt="${p.name}">
         <span class="f-name">${p.name}</span>
       </div>
+      
       <div class="face back">
         <button class="b-close">×</button>
         <div class="b-num">#${num}</div>

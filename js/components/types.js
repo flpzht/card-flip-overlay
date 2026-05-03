@@ -20,6 +20,25 @@ const typeColors = {
   fairy:    { bg:"#FFE0EE", color:"#8B1A50" },
 };
 
-const accentColors = ["#1D9E75","#1D9E75","#1D9E75","#D85A30","#D85A30","#D85A30","#378ADD","#378ADD","#378ADD"];
+const accentColors = {
+  normal:   { bg:"#6D6D4E" },
+  fire:     { bg:"#9C3A00" },
+  water:    { bg:"#0A5F8A" },
+  electric: { bg:"#7A6500" },
+  grass:    { bg:"#1E6B2E" },
+  ice:      { bg:"#1A6B80" },
+  fighting: { bg:"#8B1A10" },
+  poison:   { bg:"#6A1B6E" },
+  ground:   { bg:"#7A5500" },
+  flying:   { bg:"#3A2E8A" },
+  psychic:  { bg:"#8B0050" },
+  bug:      { bg:"#3A5A00" },
+  rock:     { bg:"#5A4A00" },
+  ghost:    { bg:"#2E1A6E" },
+  dragon:   { bg:"#0A1A8A" },
+  dark:     { bg:"#2C2416" },
+  steel:    { bg:"#2A4A5A" },
+  fairy:    { bg:"#8B1A50" },
+};
 
 export { typeColors, accentColors };

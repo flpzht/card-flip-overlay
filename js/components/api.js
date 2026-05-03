@@ -47,7 +47,7 @@ export const pokemonAPI = createPokemonAPI({
 });
 
 // pokemonAPI.loadPokemons(2).then(console.log);
-pokemonAPI.getPokemonById(1).then(console.log);
+// pokemonAPI.getPokemonById(1).then(console.log);
 
 // pokemonAPI.loadPokemons(2)
 // .then(pokemons => {

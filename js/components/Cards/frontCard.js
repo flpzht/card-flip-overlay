@@ -1,6 +1,6 @@
-import { typeColors } from './types.js';
+import { typeColors } from '../types.js';
 
-function createFrontCard({ num, name, img, types }) {
+export default function createFrontCard({ num, name, img, types }) {
 const card = document.createElement('div');
 card.className = 'card';
 
@@ -26,7 +26,7 @@ typesEl.className = 'f-types';
 
 const typeSpans = types.map(t => {
   const typeSpan = document.createElement('span');
-  typeSpan.className = 'b-type';
+  typeSpan.className = 'f-type';
   typeSpan.textContent = t;
   typeSpan.style.color = typeColors[t] ? typeColors[t].color : '#333';
   typeSpan.style.backgroundColor = typeColors[t] ? typeColors[t].bg : '#eee';
@@ -50,5 +50,3 @@ card.appendChild(face);
 
 return card;
 };
-
-export default createFrontCard;
