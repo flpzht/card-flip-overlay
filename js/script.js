@@ -18,6 +18,7 @@ pokemonAPI.loadPokemons(6).then(pokemons => {
 pokemonAPI.loadPokemons(6).then(pokemons => {
     pokemons.forEach(p => {
         const card = createBackCard(p);
-        grid.appendChild(card);
+        overlay.appendChild(card);
     });
 });
+

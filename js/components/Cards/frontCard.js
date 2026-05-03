@@ -21,30 +21,10 @@ const nameEl = document.createElement('span');
 nameEl.className = 'f-name';
 nameEl.textContent = name;
 
-const typesEl = document.createElement('span');
-typesEl.className = 'f-types';
-
-const typeSpans = types.map(t => {
-  const typeSpan = document.createElement('span');
-  typeSpan.className = 'f-type';
-  typeSpan.textContent = t;
-  typeSpan.style.color = typeColors[t] ? typeColors[t].color : '#333';
-  typeSpan.style.backgroundColor = typeColors[t] ? typeColors[t].bg : '#eee';
-  return typeSpan;
-});
-
-const numberEl = document.createElement('span');
-numberEl.className = 'f-num';
-numberEl.textContent = `#${String(num).padStart(3, '0')}`;
-
-
-typesEl.append(...typeSpans);
 
 face.appendChild(accent);
-face.appendChild(numberEl);
 face.appendChild(imgEl);
 face.appendChild(nameEl);
-face.appendChild(typesEl);
 
 card.appendChild(face);
 
