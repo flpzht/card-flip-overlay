@@ -1,17 +1,17 @@
   .header {
     width: 100%;
-    display: block;
+    background-color: rgba(218, 97, 97, 0.8);
     text-align: center;
-    padding-bottom: 2rem;
     position: fixed;
-    top: 0; left: 0;
-    z-index: 100;
-    margin: 32px;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    border-radius: 0% 0% 10px 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .header__logo {
     max-width: 100%;
     object-position: center;
     image-rendering:auto;
-    margin-bottom: 12px;
   }

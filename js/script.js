@@ -1,7 +1,6 @@
 import { pokemonAPI } from './components/api.js';
 import createFrontCard from './components/card.js';
 
-const podedex = document.getElementById('pokedex');
 const scene   = document.getElementById('scene');
 const grid    = document.getElementById('grid');
 const overlay = document.getElementById('overlay');
@@ -25,5 +24,3 @@ pokemonAPI.loadPokemons(21).then(pokemons => {
         grid.appendChild(card);
     });
 });
-
-pokemonAPI.loadPokemons(2).then(console.log);

@@ -1,4 +1,4 @@
-function createFrontCard({ number, name, img, types }) {
+function createFrontCard({ num, name, img, types }) {
 const card = document.createElement('div');
 card.className = 'card';
 
@@ -19,11 +19,11 @@ nameEl.textContent = name;
 
 const typesEl = document.createElement('span');
 typesEl.className = 'f-types';
-typesEl.textContent = types.join(', ');
+typesEl.textContent = types.join(' ');
 
 const numberEl = document.createElement('span');
-numberEl.className = 'f-number';
-numberEl.textContent = `#${String(number).padStart(3, '0')}`;
+numberEl.className = 'f-num';
+numberEl.textContent = `#${String(num).padStart(3, '0')}`;
 
 face.appendChild(accent);
 face.appendChild(numberEl);
