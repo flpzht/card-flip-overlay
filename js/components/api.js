@@ -9,7 +9,7 @@ function createPokemonAPI({ baseUrl, headers }) {
         return res.json();
     };
 
-    const getInitialPokemon = (limit = 9) => request(`/pokemon?limit=${limit}`);
+    const getInitialPokemon = (limit = 3) => request(`/pokemon?limit=${limit}`);
 
     const getPokemonById = (id) => request(`/pokemon/${id}`);
     

@@ -15,10 +15,13 @@
   <body>
     <header class="header">
         <img src="./assets/Pokdex_logo.webp" alt="Logo da Pokedex" class="header__logo">
+        <div>
+        <input type="number" name="lista" id="pokemon-list" class="header__input" placeholder="Digite o número de Pokémons" min="1" >
+        <button type="submit" class="header__button">Listar</button>
+        </div>
     </header>
-    
-    <div class="scene" id="scene">
-      <div class="overlay" id="overlay"></div>
+    <div class="overlay" id="overlay"></div>
+    <div class="scene" id="scene">      
       <div class="grid" id="grid"></div>
     </div>
 

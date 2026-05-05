@@ -6,30 +6,27 @@ import { openCard, closeCard } from "./components/animation.js";
 const scene = document.getElementById("scene");
 const grid = document.getElementById("grid");
 const overlay = document.getElementById("overlay");
+const input = document.getElementById("pokemon-list");
+const button = document.querySelector(".header__button");
 
-pokemonAPI.loadPokemons(9).then((pokemons) => {
+const num = parseInt(input.value || 150);
+pokemonAPI.loadPokemons(num).then((pokemons) => {
+  grid.replaceChildren(); // Limpa os cards existentes
   pokemons.forEach((p) => {
-    const wraps = document.createElement("div");
-    wraps.className = "card-wrap";
-
     const frontCard = createFrontCard(p);
     const backCard = createBackCard(p);
 
     frontCard.addEventListener("click", () => {
-      openCard(wraps, backCard);
+      openCard(overlay, backCard);
       frontCard.classList.add("ghost");
     });
 
     backCard.addEventListener("click", () => {
-      closeCard(overlay, backCard);
-      frontCard.classList.remove("ghost");
-      overlay.classList.remove("active");
+      closeCard(overlay, backCard, frontCard);
     });
 
     overlay.addEventListener("click", () => {
-      closeCard(overlay, backCard);
-      frontCard.classList.remove("ghost");
-      overlay.classList.remove("active");
+      closeCard(overlay, backCard, frontCard);
     });
 
     grid.appendChild(frontCard);
