@@ -1,10 +1,10 @@
 import { typeColors } from '../types.js';
 
 export default function createFrontCard({ num, name, img, types }) {
-const card = document.createElement('div');
+const card = document.createElement('ul');
 card.className = 'card';
 
-const face = document.createElement('div');
+const face = document.createElement('li');
 face.className = 'face front';
 face.style.backgroundColor = typeColors[types[0]] ? typeColors[types[0]].bg : '#eee';
 
