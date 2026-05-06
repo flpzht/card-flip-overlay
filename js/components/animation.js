@@ -3,8 +3,20 @@ const overlay = document.getElementById("overlay");
 let _flipWrap = null;
 let _frontCard = null;
 let _backCard = null;
+let _ghost = null;
 
-function openCard(div, frontCard, backCard, cardRect) {
+function openCard(div, frontCard, backCard) {
+
+    const cardRect = frontCard.getBoundingClientRect();
+
+        _ghost = document.createElement("div");
+        _ghost.className = "ghost";
+        _ghost.style.cssText = `
+            width: ${frontCard.offsetWidth}px;
+            height: ${frontCard.offsetHeight}px;`;
+
+        frontCard.replaceWith(_ghost);
+
   const flipWrap = document.createElement("div");
   flipWrap.style.cssText = `
     position: fixed;
@@ -70,13 +82,14 @@ function openCard(div, frontCard, backCard, cardRect) {
   );
 }
 
-function closeCard(ghostCard) {
+function closeCard() {
   if (!_flipWrap) return;
 
   const flipWrap = _flipWrap;
   const frontCard = _frontCard;
+  const ghost = _ghost;
 
-  const ghostRect = ghostCard.getBoundingClientRect();
+  const ghostRect = ghost.getBoundingClientRect();
 
   flipWrap.style.cssText = `
     position: fixed;
@@ -98,6 +111,7 @@ function closeCard(ghostCard) {
   _flipWrap = null;
   _frontCard = null;
   _backCard = null;
+    _ghost = null;
 
   flipWrap.addEventListener(
     "transitionend",
@@ -105,7 +119,7 @@ function closeCard(ghostCard) {
       flipWrap.removeEventListener("transitionend", done);
       
       frontCard.style.cssText = "";
-      ghostCard.replaceWith(frontCard);
+      ghost.replaceWith(frontCard);
       flipWrap.remove();
     },
     { once: true },

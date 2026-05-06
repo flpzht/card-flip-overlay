@@ -45,13 +45,3 @@ export const pokemonAPI = createPokemonAPI({
     baseUrl: 'https://pokeapi.co/api/v2',
     headers: { 'Content-Type': 'application/json' },
 });
-
-// pokemonAPI.loadPokemons(2).then(console.log);
-// pokemonAPI.getPokemonById(1).then(console.log);
-
-// pokemonAPI.loadPokemons(2)
-// .then(pokemons => {
-//     pokemons.forEach(({num, name, img, types}) => {
-//         console.log(`Num: ${num}, Name: ${name}, Image: ${img}, Types: ${types}`);
-//     });
-// });

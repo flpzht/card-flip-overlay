@@ -8,9 +8,7 @@ const overlay = document.getElementById("overlay");
 const input = document.getElementById("pokemon-list");
 const button = document.querySelector(".header__button");
 
-button.addEventListener("click", () => {
-  const num = parseInt(input.value || 151);
-
+const loadCards = (num) => {
   pokemonAPI.loadPokemons(num).then((pokemons) => {
     grid.replaceChildren();
 
@@ -20,20 +18,10 @@ button.addEventListener("click", () => {
 
 
       frontCard.addEventListener("click", () => {
-
-        const cardRect = frontCard.getBoundingClientRect();
-
-        const ghost = document.createElement("div");
-        ghost.className = "ghost";
-        ghost.style.cssText = `
-    width: ${frontCard.offsetWidth}px;
-    height: ${frontCard.offsetHeight}px;`;
-
-        frontCard.replaceWith(ghost);
-        openCard(overlay, frontCard, backCard, cardRect);
+        openCard(overlay, frontCard, backCard);
 
         const handleClose = () => {
-          closeCard(ghost);
+          closeCard();
           overlay.removeEventListener("click", handleClose);
           backCard.removeEventListener("click", handleClose);
         };
@@ -45,4 +33,10 @@ button.addEventListener("click", () => {
       grid.appendChild(frontCard);
     });
   });
+};
+loadCards(151);
+
+button.addEventListener("click", () => {
+  const num = parseInt(input.value);
+  loadCards(num);
 });

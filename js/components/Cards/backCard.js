@@ -5,9 +5,6 @@ export default function createBackCard({ num, name, img, types }) {
   const backCard = document.createElement("div");
   backCard.className = "b-card";
 
-  const btnClose = document.createElement("button");
-  btnClose.className = "b-close";
-  btnClose.textContent = "X";
 
   const accent = document.createElement("div");
   accent.className = "b-accent";
@@ -42,7 +39,7 @@ export default function createBackCard({ num, name, img, types }) {
 
   typesEl.append(...typeSpans);
 
-  backCard.appendChild(btnClose);
+
   backCard.appendChild(accent);
   backCard.appendChild(numberEl);
   backCard.appendChild(imgEl);
