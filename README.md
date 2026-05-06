@@ -1,64 +1,103 @@
 # 🃏 Pokémon Card Flip
 
-Projeto de cards interativos de Pokémon com animação de flip 3D. Ao clicar em um card, ele se expande para o centro da tela e revela detalhes do Pokémon: número, tipo(s) e artwork oficial — com transições suaves em CSS. Os dados são consumidos em tempo real da [PokéAPI](https://pokeapi.co/).
+Projeto desenvolvido com foco em **boas práticas de Front-end**, animações CSS 3D e consumo de API REST pública.
 
 ---
 
-## ✨ Funcionalidades
+## 👀 Visão Geral
 
-- Grid 3×2 de cards com skeleton de loading
-- Animação flip 3D ao abrir e fechar
-- Expansão do card para o centro da tela com overlay escurecido
-- Fechamento pelo botão `×` ou clicando fora do card
-- Cores de tipo dinâmicas (18 tipos de Pokémon)
-- Cor de destaque única por card
+Este projeto demonstra minha capacidade de:
+
+- Estruturar aplicações Web de forma modular e organizada
+- Aplicar animações 3D com CSS (`perspective`, `transform-style`, `backface-visibility`)
+- Escrever JavaScript limpo com ES Modules sem bundler
+- Consumir uma API REST pública de forma assíncrona
+- Versionar código corretamente com Git e GitHub
 
 ---
 
-## 🗂 Estrutura de pastas
+## 🎯 Objetivo do Projeto
+
+Criar uma Pokédex interativa onde cada Pokémon é exibido como um card. Ao clicar, o card realiza um **flip 3D** e se expande para o centro da tela, revelando detalhes como número, tipo(s) e artwork oficial, com animações suaves e dados consumidos em tempo real da [PokéAPI](https://pokeapi.co/).
+
+---
+
+## 🛠 Tecnologias Utilizadas
+
+- HTML5 (estrutura semântica)
+- CSS3 — Grid, `perspective`, `transform-style: preserve-3d`, `backface-visibility`, transições customizadas
+- JavaScript ES Modules (sem framework, sem bundler)
+- [PokéAPI v2](https://pokeapi.co/) — REST API pública e gratuita
+
+---
+
+## 📂 Estrutura do Projeto
 
 ```
-pokemon-card-flip/
+card-flip-overlay/
 ├── index.html
 ├── assets/
 │   ├── poke-icon.png
 │   └── Pokdex_logo.webp
 ├── css/
-│   ├── index.css           ← importa todos os blocos
+│   ├── index.css
+│   ├── vendor/
+│   │   ├── normalize.css
+│   │   └── reset.css
 │   └── blocks/
-│       ├── base.css        ← reset e layout global
-│       ├── header.css      ← logo e cabeçalho
-│       ├── scene.css       ← container 3D e grid
-│       ├── card.css        ← card, faces, skeleton, ghost
-│       └── overlay.css     ← fundo escurecido
+│       ├── base.css
+│       ├── header.css
+│       ├── scene.css
+│       ├── card.css
+│       └── overlay.css
 └── js/
-    ├── index.js            ← ponto de entrada
-    ├── api.js              ← chamadas à PokéAPI
-    ├── card.js             ← construção do HTML dos cards
-    ├── animation.js        ← lógica de flip e transições
-    └── types.js            ← paletas de cores por tipo
+    ├── script.js         ← entrada e orquestração
+    ├── components/
+    │   ├── api.js        ← chamadas à PokéAPI
+    │   ├── animation.js  ← lógica de flip e transições
+    │   ├── types.js      ← paleta de cores por tipo
+    │   └── Cards/
+    │       ├── frontCard.js
+    │       └── backCard.js
 ```
 
 ---
 
-## 🚀 Como rodar
+## ⚙️ Funcionalidades
 
-O projeto usa **ES Modules** nativos (`import`/`export`), então é necessário servir os arquivos via HTTP, abrir o `index.html` diretamente no navegador não funcionará por restrições de CORS.
+- Carregamento inicial com os 151 Pokémons da 1ª geração
+- Grid responsivo de cards com artwork oficial
+- Animação flip 3D ao clicar no card
+- Expansão do card para o centro da tela com overlay escurecido
+- Fechamento clicando fora do card ou no overlay
+- Cores de fundo e destaque dinâmicas baseadas no tipo do Pokémon (18 tipos)
+- Input para filtrar quantos Pokémons exibir
 
-### Opção 1 — VS Code Live Server
+---
+
+## 📸 Preview
+
+> *(adicionar GIF ou screenshot do projeto)*
+
+---
+
+## ▶️ Como executar o projeto
+
+O projeto usa **ES Modules nativos** (`import`/`export`), por isso é necessário servir via HTTP, abrir o `index.html` direto no navegador não funcionará.
+
+**Opção 1 — VS Code Live Server**
 
 Instale a extensão [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) e clique em **Go Live**.
 
-### Opção 2 — Node.js `serve`
+**Opção 2 — Node.js**
 
 ```bash
 npx serve .
 ```
 
-### Opção 3 — Python
+**Opção 3 — Python**
 
 ```bash
-# Python 3
 python -m http.server 5500
 ```
 
@@ -66,67 +105,50 @@ Acesse `http://localhost:5500` no navegador.
 
 ---
 
-## 🔌 API
-
-Os dados são obtidos da [PokéAPI v2](https://pokeapi.co/). Nenhuma chave de API é necessária.
-
-| Endpoint usado | Descrição |
-|---|---|
-| `GET /pokemon/{id}` | Dados, sprites e tipos do Pokémon |
-
-Para alterar os Pokémon exibidos, edite o array `POKEMON_IDS` em `js/index.js`:
-
-```js
-const POKEMON_IDS = [1, 2, 3, 4, 5, 6]; // aceita IDs ou nomes
-```
-
----
-
-## 🎨 Personalização
-
-| O que mudar | Onde |
-|---|---|
-| Pokémon exibidos | `js/index.js` → `POKEMON_IDS` |
-| Cores de destaque dos cards | `js/types.js` → `accentColors` |
-| Paleta de cores por tipo | `js/types.js` → `typeColors` |
-| Velocidade das animações | `js/animation.js` → valores de `transition` |
-| Tamanho do card expandido | `js/animation.js` → `popW` |
-| Layout do grid | `css/blocks/scene.css` → `.grid` |
-
----
-
 ## 🧩 Arquitetura JS
 
-O JavaScript é dividido em módulos ES com responsabilidades claras:
-
 ```
-index.js
-  ├── api.js        → fetchMultiplePokemon()
-  ├── card.js       → buildCard()
-  ├── animation.js  → openNew() / closeCard()
-  └── types.js      → typeColors / accentColors
+script.js
+  ├── api.js        → createPokemonAPI(), loadPokemons()
+  ├── animation.js  → openCard(), closeCard()
+  ├── types.js      → typeColors, accentColors
+  └── Cards/
+      ├── frontCard.js → createFrontCard()
+      └── backCard.js  → createBackCard()
 ```
 
 A animação funciona em duas etapas:
 
-1. **Abrir** — um elemento *ghost* (invisível) ocupa o lugar original do card no grid; o card real é movido para a `scene` e transicionado até o centro com `rotateY(180deg)`.
-2. **Fechar** — o card reverte posição e rotação; ao fim da `transitionend`, é devolvido ao `wrap` e o ghost é removido.
+1. **Abrir** — um elemento *ghost* invisível ocupa o lugar original no grid; um `flipWrap` com `preserve-3d` é criado na posição do card e animado até o centro com `rotateY(180deg)`, revelando o backCard.
+2. **Fechar** — o `flipWrap` anima de volta para a posição do ghost com `rotateY(0deg)`; após `transitionend`, o frontCard é devolvido ao grid e o ghost removido.
 
 ---
 
-## 🛠 Tecnologias
+## 📚 Aprendizados Técnicos
 
-- HTML5 semântico
-- CSS3 — Grid, `perspective`, `transform-style: preserve-3d`, `backface-visibility`
-- JavaScript ES Modules (sem bundler)
-- [PokéAPI](https://pokeapi.co/) — REST API pública
-
----
-
-## 📄 Licença
-
-MIT — livre para uso pessoal e comercial.
+- Animações 3D com CSS e controle via JavaScript (`transform-style: preserve-3d`, `backface-visibility`)
+- Uso de `requestAnimationFrame` duplo para garantir que o browser pinte o estado inicial antes de aplicar transições
+- Gerenciamento de estado de animação com variáveis de módulo (`_flipWrap`, `_ghost`)
+- Separação de responsabilidades em módulos ES sem bundler
+- Consumo assíncrono de API com `Promise.all` para requisições paralelas
+- Boas práticas de versionamento com Conventional Commits
 
 ---
 
-Feito por [Felipe Carvalho](https://github.com/flpzht) · 2026
+## 🔗 Deploy
+
+Projeto publicado via **GitHub Pages**:
+
+[PokeDex](https://flpzht.github.io/card-flip-overlay/)
+
+---
+
+## 👤 Autor
+
+Felipe Carvalho
+GitHub: [flpzht](https://github.com/flpzht)
+LinkedIn: [Felipe](www.linkedin.com/in/felipecarvalhodesouzabarros)
+
+---
+
+Este projeto faz parte do meu processo contínuo de aprendizado e evolução como desenvolvedor Web.
