@@ -1,47 +1,115 @@
-function openCard(div, card) {
-    const cardRect = card.getBoundingClientRect();
+const overlay = document.getElementById("overlay");
 
-    // inicial: fixed com coordenadas da janela, sem transição
-    card.style.cssText = `
-        position: fixed;
-        top: ${cardRect.top}px;
-        left: ${cardRect.left}px;
-        width: ${cardRect.width}px;
-        height: ${cardRect.height}px;
-        transition: none;
-        z-index: 20;`;
-    overlay.appendChild(card);
+let _flipWrap = null;
+let _frontCard = null;
+let _backCard = null;
 
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-        const popW = Math.min(350, window.innerWidth * 0.55);
-        const popH = popW * (4 / 3);
-        const targetTop  = (window.innerHeight - popH) / 2;
-        const targetLeft = (window.innerWidth  - popW) / 2;
+function openCard(div, frontCard, backCard, cardRect) {
+  const flipWrap = document.createElement("div");
+  flipWrap.style.cssText = `
+    position: fixed;
+    top: ${cardRect.top}px;
+    left: ${cardRect.left}px;
+    width: ${cardRect.width}px;
+    height: ${cardRect.height}px;
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+    transition: none;
+    z-index: 20;`;
 
-        card.style.cssText = `
-            position: fixed;
-            top: ${targetTop}px;
-            left: ${targetLeft}px;
-            width: ${popW}px;
-            height: ${popH}px;
-            transform: rotateY(180deg);
-            transform-style: preserve-3d;
-            transition:
-                top 0.85s cubic-bezier(0.4,0,0.2,1),
-                left 0.85s cubic-bezier(0.4,0,0.2,1),
-                width 0.85s cubic-bezier(0.4,0,0.2,1),
-                height 0.85s cubic-bezier(0.4,0,0.2,1),
-                transform 0.85s cubic-bezier(0.4,0,0.2,1);
-            z-index: 20;`;
-        overlay.classList.add('active');
-    }));
+  frontCard.style.cssText = `
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;`;
+
+  backCard.style.cssText = `
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: rotateY(180deg);`;
+
+  flipWrap.appendChild(frontCard);
+  flipWrap.appendChild(backCard);
+  overlay.appendChild(flipWrap);
+
+  _flipWrap = flipWrap;
+  _frontCard = frontCard;
+  _backCard = backCard;
+
+  requestAnimationFrame(() =>
+    requestAnimationFrame(() => {
+      const popW = Math.min(350, window.innerWidth * 0.55);
+      const popH = popW * (4 / 3);
+      const targetTop = (window.innerHeight - popH) / 2;
+      const targetLeft = (window.innerWidth - popW) / 2;
+
+      flipWrap.style.cssText = `
+      position: fixed;
+      top: ${targetTop}px;
+      left: ${targetLeft}px;
+      width: ${popW}px;
+      height: ${popH}px;
+      transform-style: preserve-3d;
+      transform: rotateY(180deg);
+      transition:
+        top 0.65s cubic-bezier(0.4,0,0.2,1),
+        left 0.65s cubic-bezier(0.4,0,0.2,1),
+        width 0.65s cubic-bezier(0.4,0,0.2,1),
+        height 0.65s cubic-bezier(0.4,0,0.2,1),
+        transform 0.65s cubic-bezier(0.4,0,0.2,1);
+      z-index: 20;`;
+
+      overlay.classList.add("active");
+    }),
+  );
 }
 
-function closeCard(div, bcard, fcard) {
-    div.removeChild(bcard);
-    fcard.classList.remove('ghost');
-    overlay.classList.remove('active');
+function closeCard(ghostCard) {
+  if (!_flipWrap) return;
 
+  const flipWrap = _flipWrap;
+  const frontCard = _frontCard;
+
+  const ghostRect = ghostCard.getBoundingClientRect();
+
+  flipWrap.style.cssText = `
+    position: fixed;
+    top: ${ghostRect.top}px;
+    left: ${ghostRect.left}px;
+    width: ${ghostRect.width}px;
+    height: ${ghostRect.height}px;
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+    transition:
+      top 0.55s cubic-bezier(0.4,0,0.2,1),
+      left 0.55s cubic-bezier(0.4,0,0.2,1),
+      width 0.55s cubic-bezier(0.4,0,0.2,1),
+      height 0.55s cubic-bezier(0.4,0,0.2,1),
+      transform 0.55s cubic-bezier(0.4,0,0.2,1);
+    z-index: 20;`;
+
+  overlay.classList.remove("active");
+  _flipWrap = null;
+  _frontCard = null;
+  _backCard = null;
+
+  flipWrap.addEventListener(
+    "transitionend",
+    function done() {
+      flipWrap.removeEventListener("transitionend", done);
+      
+      frontCard.style.cssText = "";
+      ghostCard.replaceWith(frontCard);
+      flipWrap.remove();
+    },
+    { once: true },
+  );
 }
 
 export { openCard, closeCard };
