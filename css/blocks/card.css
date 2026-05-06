@@ -69,23 +69,7 @@
 
   /* ===== Back Card ===== */
 
-  .b-card {
-    height: 100%;
-    aspect-ratio: 3/4;
-    position: relative;
-    transform-style: preserve-3d;
-    border-radius: 16px;
-    cursor: pointer;
-    transition:
-      transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-      width 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-      height 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-      top 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-      left 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-      scale 350ms ease,
-      opacity 350ms linear;
-  }
-
+ 
  
 
   .back {
@@ -176,15 +160,7 @@
 
 /* ==== Popup ==== */
 
- .popup--active {
-  z-index: 20;
-  transition:
-    transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-    width 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-    height 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-    top 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-    left 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-}
+
 
 
   /* ===== Ghost & Skeleton Loading States ===== */

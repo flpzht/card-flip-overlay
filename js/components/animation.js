@@ -25,6 +25,7 @@ function openCard(div, card) {
             width: ${popW}px;
             height: ${popH}px;
             transform: rotateY(180deg);
+            transform-style: preserve-3d;
             transition:
                 top 0.85s cubic-bezier(0.4,0,0.2,1),
                 left 0.85s cubic-bezier(0.4,0,0.2,1),

@@ -3,7 +3,7 @@ import { typeColors, accentColors } from '../types.js';
 export default function createBackCard({ num, name, img, types }) {
 
 const backCard = document.createElement('ul');
-backCard.className = 'b-card';
+backCard.className = '';
 
 const back = document.createElement('li');
 back.className = 'face back';
